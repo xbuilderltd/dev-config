@@ -1,0 +1,96 @@
+{
+  "name": "@pixpilot/dev-config",
+  "version": "1.0.6",
+  "description": "Modern, opinionated development configurations for TypeScript/JavaScript projects including ESLint, Prettier, Jest, and TypeScript configs",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./eslint": {
+      "types": "./dist/eslint.d.ts",
+      "import": "./dist/eslint.js",
+      "default": "./dist/eslint.js"
+    },
+    "./eslint-jest": {
+      "types": "./dist/eslint-jest.d.ts",
+      "import": "./dist/eslint-jest.js",
+      "default": "./dist/eslint-jest.js"
+    },
+    "./prettier": {
+      "types": "./dist/prettier.d.ts",
+      "import": "./dist/prettier.js",
+      "default": "./dist/prettier.js"
+    },
+    "./jest": {
+      "types": "./dist/jest.d.ts",
+      "import": "./dist/jest.js",
+      "default": "./dist/jest.js"
+    },
+    "./typescript": "./dist/tsconfig-base.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && pnpm run copy-assets",
+    "compile": "tsc && pnpm run copy-assets",
+    "copy-assets": "node -e \"const fs = require('fs'); const path = require('path'); const src = 'src/tsconfig-base.json', dest = 'dist/tsconfig-base.json'; if (fs.existsSync(src)) { fs.mkdirSync(path.dirname(dest), { recursive: true }); fs.copyFileSync(src, dest); } else console.warn('Warning: ' + src + ' does not exist, skipping copy.');\"",
+    "clean": "rimraf dist",
+    "test": "node test/verify.js",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "tsc:watch": "tsc --noEmit --watch",
+    "fix:all": "pnpm run lint:fix && pnpm run format:fix",
+    "prepublishOnly": "pnpm run clean && pnpm run build"
+  },
+  "keywords": [
+    "eslint",
+    "prettier",
+    "typescript",
+    "jest",
+    "tsconfig",
+    "config",
+    "development",
+    "linting",
+    "formatting",
+    "testing"
+  ],
+  "author": "pixpilot",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0",
+    "prettier": "^3.6.0",
+    "typescript": "^5.0.0"
+  },
+  "optionalPeerDependencies": {
+    "jest": "^29.0.0"
+  },
+  "dependencies": {
+    "@eslint/compat": "^1.3.0",
+    "@eslint/js": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jest": "^29.0.1",
+    "ts-jest": "^29.4.0",
+    "typescript-eslint": "^8.35.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^24.0.3",
+    "@typescript-eslint/utils": "^8.35.0",
+    "prettier": "^3.6.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3"
+  }
+}
