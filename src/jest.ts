@@ -1,3 +1,7 @@
+// Jest configuration for TypeScript projects
+// This file provides a Jest configuration that users can extend
+// Requires jest to be installed as an optional peer dependency
+
 import type { Config } from 'jest';
 
 const config: Config = {
@@ -28,11 +32,7 @@ const config: Config = {
   },
 
   // Test file patterns
-  testMatch: [
-    '**/__tests__/**/*.(ts|tsx|js|jsx)',
-    '**/*.(test|spec).(ts|tsx|js|jsx)',
-    'sssss2ss',
-  ],
+  testMatch: ['**/__tests__/**/*.(ts|tsx|js|jsx)', '**/*.(test|spec).(ts|tsx|js|jsx)'],
 
   // Files to ignore
   testPathIgnorePatterns: ['/node_modules/', '/dist/', '/build/', '/coverage/'],
