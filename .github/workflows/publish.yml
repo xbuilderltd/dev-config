@@ -1,87 +1,29 @@
-name: Publish Package
+name: Release Package
 
 on:
-  release:
-    types: [published]
   push:
     branches: [main]
-    paths:
-      - 'package.json'
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to publish (leave empty for current package.json version)'
-        required: false
-        type: string
 
 jobs:
-  check-version:
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    outputs:
-      version-changed: ${{ steps.check.outputs.version-changed }}
-      new-version: ${{ steps.check.outputs.new-version }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2 # Need at least 2 commits to compare
-
-      - name: Check if version changed
-        id: check
-        run: |
-          # Get the version from current commit
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-
-          # Get the version from previous commit
-          git checkout HEAD~1 -- package.json
-          PREVIOUS_VERSION=$(node -p "require('./package.json').version")
-
-          # Restore current package.json
-          git checkout HEAD -- package.json
-
-          echo "Previous version: $PREVIOUS_VERSION"
-          echo "Current version: $CURRENT_VERSION"
-
-          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
-            echo "Version changed from $PREVIOUS_VERSION to $CURRENT_VERSION"
-            echo "version-changed=true" >> $GITHUB_OUTPUT
-            echo "new-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
-          else
-            echo "Version unchanged"
-            echo "version-changed=false" >> $GITHUB_OUTPUT
-          fi
-
-  publish:
-    if: |
-      github.event_name == 'release' ||
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'push' && needs.check-version.outputs.version-changed == 'true')
-    needs: [check-version]
+  release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
       contents: write # Need write permission to create and push tags
+      pull-requests: write # For creating release PRs
       id-token: write # For npm provenance
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
 
       - name: Setup pnpm and Node.js
         uses: ./.github/actions/setup-pnpm
         with:
           registry-url: 'https://registry.npmjs.org'
-
-      - name: Show version info
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "Publishing version: $VERSION"
-          if [ "${{ github.event_name }}" = "push" ]; then
-            echo "Triggered by version change detection"
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Triggered manually"
-          elif [ "${{ github.event_name }}" = "release" ]; then
-            echo "Triggered by GitHub release"
-          fi
 
       - name: Install dependencies
         run: pnpm install
@@ -89,24 +31,14 @@ jobs:
       - name: Build package
         run: pnpm run build
 
-      - name: Update version (manual trigger only)
-        if: github.event_name == 'workflow_dispatch' && github.event.inputs.version
-        run: |
-          pnpm version ${{ github.event.inputs.version }} --no-git-tag-version
-          echo "Updated version to ${{ github.event.inputs.version }}"
-
-      - name: Publish to npm
-        run: pnpm publish --no-git-checks --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Create Git tag
-        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.check-version.outputs.version-changed == 'true')
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git tag -a "v$VERSION" -m "Release v$VERSION"
-          git push origin "v$VERSION"
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: pnpm changeset:publish
+          title: 'chore: release package'
+          commit: 'chore: release package'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

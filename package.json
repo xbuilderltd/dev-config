@@ -1,6 +1,6 @@
 {
   "name": "@pixpilot/dev-config",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Modern, opinionated development configurations for TypeScript/JavaScript projects including ESLint, Prettier, Jest, and TypeScript configs",
   "type": "module",
   "main": "./dist/index.js",
@@ -46,7 +46,10 @@
     "typecheck": "tsc --noEmit",
     "tsc:watch": "tsc --noEmit --watch",
     "fix:all": "pnpm run lint:fix && pnpm run format:fix",
-    "prepublishOnly": "pnpm run clean && pnpm run build"
+    "prepublishOnly": "pnpm run clean && pnpm run build",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:publish": "pnpm run build && changeset publish"
   },
   "keywords": [
     "eslint",
@@ -91,6 +94,7 @@
     "typescript-eslint": "^8.35.0"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.5",
     "@types/jest": "^29.5.14",
     "@types/node": "^24.0.3",
     "@typescript-eslint/utils": "^8.35.0",
