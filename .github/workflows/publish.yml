@@ -60,7 +60,7 @@ jobs:
     needs: [check-version]
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write # Need write permission to create and push tags
       id-token: write # For npm provenance
     steps:
       - name: Checkout repository
@@ -104,8 +104,8 @@ jobs:
         if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.check-version.outputs.version-changed == 'true')
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git tag -a "v$VERSION" -m "Release v$VERSION"
           git push origin "v$VERSION"
         env:
