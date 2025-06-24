@@ -21,7 +21,6 @@ runs:
       uses: pnpm/action-setup@v4
       with:
         version: ${{ inputs.pnpm-version }}
-      shell: bash
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -29,4 +28,3 @@ runs:
         node-version: ${{ inputs.node-version }}
         cache: 'pnpm'
         registry-url: ${{ inputs.registry-url }}
-      shell: bash
