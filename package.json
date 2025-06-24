@@ -62,6 +62,10 @@
   ],
   "author": "pixpilot",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixpilot/dev-config"
+  },
   "publishConfig": {
     "access": "public"
   },
