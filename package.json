@@ -49,7 +49,8 @@
     "prepublishOnly": "pnpm run clean && pnpm run build",
     "changeset": "changeset",
     "changeset:version": "changeset version",
-    "changeset:publish": "pnpm run build && changeset publish"
+    "changeset:publish": "pnpm run build && changeset publish",
+    "prepare": "husky"
   },
   "keywords": [
     "eslint",
@@ -98,9 +99,17 @@
     "@types/jest": "^29.5.14",
     "@types/node": "^24.0.3",
     "@typescript-eslint/utils": "^8.35.0",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.6.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "pnpm fix:all",
+      "git add"
+    ]
   }
 }
