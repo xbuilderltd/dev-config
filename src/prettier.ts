@@ -17,5 +17,4 @@ const config: PrettierConfig = {
   arrowParens: 'always',
   endOfLine: 'lf',
 };
-
 export default config;
