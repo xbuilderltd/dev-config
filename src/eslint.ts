@@ -62,14 +62,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
 
   // Base configuration for all JS/TS files
   {
-    files: [
-      '**/*.js',
-      '**/*.ts',
-      '**/*.tsx',
-      '**/*.jsx',
-      '**/*.mjs',
-      '**/*.cjs',
-    ],
+    files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.jsx', '**/*.mjs', '**/*.cjs'],
 
     plugins: {
       import: importPlugin,
@@ -118,14 +111,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       'import/order': [
         'error',
         {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
         },

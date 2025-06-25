@@ -1,5 +1,12 @@
 # @pixpilot/dev-config
 
+## 1.0.12
+
+### Patch Changes
+
+- f20fbea: Revert
+- a634720: retry
+
 ## 1.0.11
 
 ### Patch Changes

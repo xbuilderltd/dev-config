@@ -1,6 +1,6 @@
 {
   "name": "@pixpilot/dev-config",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Modern, opinionated development configurations for TypeScript/JavaScript projects including ESLint, Prettier, Jest, and TypeScript configs",
   "type": "module",
   "main": "./dist/index.js",
@@ -107,6 +107,7 @@
     "@typescript-eslint/utils": "^8.35.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
+    "jiti": "^2.4.2",
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.0",
     "rimraf": "^6.0.1",
