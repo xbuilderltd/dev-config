@@ -51,6 +51,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   {
     ignores: [
       'dist/',
+      '**/dist/**',
       'build/',
       'coverage/',
       'node_modules/',

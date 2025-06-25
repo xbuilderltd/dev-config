@@ -1,5 +1,11 @@
 # @pixpilot/dev-config
 
+## 1.0.15
+
+### Patch Changes
+
+- update changeset commands and improve ESLint ignore patterns
+
 ## 1.0.14
 
 ### Patch Changes

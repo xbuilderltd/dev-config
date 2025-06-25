@@ -1,6 +1,6 @@
 {
   "name": "@pixpilot/dev-config",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Modern, opinionated development configurations for TypeScript/JavaScript projects including ESLint, Prettier, Jest, and TypeScript configs",
   "type": "module",
   "main": "./dist/index.js",
@@ -49,6 +49,7 @@
     "prepublishOnly": "pnpm run clean && pnpm run build",
     "changeset": "changeset",
     "changeset:version": "changeset version",
+    "changeset:release": "changeset && changeset version",
     "changeset:publish": "pnpm run build && changeset publish",
     "prepare": "husky"
   },
