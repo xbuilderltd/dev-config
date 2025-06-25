@@ -64,7 +64,7 @@ async function test() {
       indexExports.eslintJestConfig &&
       indexExports.prettierConfig
     ) {
-      console.log('✓ Index exports eslintConfig, eslintJestConfig, and prettierConfig.');
+      console.log('✓ Index exports eslintConfig, eslintJestConfig, and prettierConfig');
     } else {
       throw new Error('Index should export all configs');
     } // Verify package.json exports
