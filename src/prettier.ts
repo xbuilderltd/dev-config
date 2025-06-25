@@ -2,7 +2,7 @@ import type { PrettierConfig } from './types.d.ts';
 
 const config: PrettierConfig = {
   // Line length and formatting
-  printWidth: 90,
+  printWidth: 80,
   tabWidth: 2,
   useTabs: false,
 

@@ -32,7 +32,10 @@ const config: Config = {
   },
 
   // Test file patterns
-  testMatch: ['**/__tests__/**/*.(ts|tsx|js|jsx)', '**/*.(test|spec).(ts|tsx|js|jsx)'],
+  testMatch: [
+    '**/__tests__/**/*.(ts|tsx|js|jsx)',
+    '**/*.(test|spec).(ts|tsx|js|jsx)',
+  ],
 
   // Files to ignore
   testPathIgnorePatterns: ['/node_modules/', '/dist/', '/build/', '/coverage/'],

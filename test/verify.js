@@ -10,7 +10,9 @@ async function test() {
     const eslintConfig = await import('../dist/eslint.js');
     if (Array.isArray(eslintConfig.default)) {
       console.log('✓ ESLint config is an array (flat config format)');
-      console.log(`  - Contains ${eslintConfig.default.length} configuration objects`);
+      console.log(
+        `  - Contains ${eslintConfig.default.length} configuration objects`,
+      );
     } else {
       throw new Error('ESLint config should be an array');
     }
@@ -30,7 +32,10 @@ async function test() {
     // Test Prettier config import
     console.log('✓ Testing Prettier config import...');
     const prettierConfig = await import('../dist/prettier.js');
-    if (typeof prettierConfig.default === 'object' && prettierConfig.default !== null) {
+    if (
+      typeof prettierConfig.default === 'object' &&
+      prettierConfig.default !== null
+    ) {
       console.log('✓ Prettier config is an object');
       console.log(`  - printWidth: ${prettierConfig.default.printWidth}`);
       console.log(`  - tabWidth: ${prettierConfig.default.tabWidth}`);
@@ -50,7 +55,9 @@ async function test() {
       tsConfigRaw.includes('"target": "ES2022"') &&
       tsConfigRaw.includes('"module": "Preserve"')
     ) {
-      console.log('✓ TypeScript config is valid and contains expected settings');
+      console.log(
+        '✓ TypeScript config is valid and contains expected settings',
+      );
       console.log('  - Contains strict: true');
       console.log('  - Contains target: ES2022');
       console.log('  - Contains module: Preserve');
@@ -64,7 +71,9 @@ async function test() {
       indexExports.eslintJestConfig &&
       indexExports.prettierConfig
     ) {
-      console.log('✓ Index exports eslintConfig, eslintJestConfig, and prettierConfig');
+      console.log(
+        '✓ Index exports eslintConfig, eslintJestConfig, and prettierConfig',
+      );
     } else {
       throw new Error('Index should export all configs');
     } // Verify package.json exports
