@@ -1,5 +1,11 @@
 # @pixpilot/dev-config
 
+## 1.0.11
+
+### Patch Changes
+
+- 4cd1d69: changed printWidth
+
 ## 1.0.10
 
 ### Patch Changes
