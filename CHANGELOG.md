@@ -1,5 +1,13 @@
 # @pixpilot/dev-config
 
+## 1.0.13
+
+### Patch Changes
+
+- e052042: Ignore source map files
+- 7c5c3ea: Force New Version
+- 2c99c45: Add 'no-implicit-coercion' rule to ESLint configuration
+
 ## 1.0.12
 
 ### Patch Changes
