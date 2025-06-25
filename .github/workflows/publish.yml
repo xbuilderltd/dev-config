@@ -77,11 +77,9 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm changeset:publish
           title: 'chore: release package'
           commit: 'chore: release package'
-          createGithubReleases: true
+          createGithubReleases: false
           setupGitUser: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
