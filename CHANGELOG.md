@@ -1,5 +1,11 @@
 # @pixpilot/dev-config
 
+## 1.0.18
+
+### Patch Changes
+
+- cac4862: disable GitHub releases creation in release PR step
+
 ## 1.0.17
 
 ### Patch Changes
