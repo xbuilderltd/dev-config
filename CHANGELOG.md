@@ -1,5 +1,14 @@
 # @pixpilot/dev-config
 
+## 1.0.17
+
+### Patch Changes
+
+- 6e17f27: update publish workflow and refine changeset commands
+- e7bf1d8: update publish workflow to include id-token permission and refine release steps
+- f2a7dc1: enable GitHub releases creation in release PR step
+- b4e7be5: chore: ensure Git user is set up for release PR creation
+
 ## 1.0.15
 
 ### Patch Changes
