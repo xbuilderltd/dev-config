@@ -52,6 +52,12 @@
     "changeset:publish": "pnpm run build && changeset publish",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "keywords": [
     "eslint",
     "prettier",
@@ -105,11 +111,5 @@
     "prettier": "^3.6.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
-      "pnpm fix:all",
-      "git add"
-    ]
   }
 }
