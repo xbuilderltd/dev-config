@@ -1,5 +1,11 @@
 # @pixpilot/dev-config
 
+## 1.0.20
+
+### Patch Changes
+
+- 9ac09cf: add coverage directory to ESLint ignore patterns
+
 ## 1.0.19
 
 ### Patch Changes
