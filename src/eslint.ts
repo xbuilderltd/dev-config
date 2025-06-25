@@ -128,6 +128,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       'no-debugger': 'error',
       'prefer-const': 'error',
       'no-var': 'error',
+      'no-implicit-coercion': 'error',
     },
   },
 
