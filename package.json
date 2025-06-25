@@ -1,6 +1,6 @@
 {
   "name": "@pixpilot/dev-config",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Modern, opinionated development configurations for TypeScript/JavaScript projects including ESLint, Prettier, Jest, and TypeScript configs",
   "type": "module",
   "main": "./dist/index.js",
