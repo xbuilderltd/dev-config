@@ -72,7 +72,8 @@ jobs:
         with:
           title: 'chore: release package'
           commit: 'chore: release package'
+          createGithubReleases: true
           setupGitUser: true
-          # Note: No 'publish' parameter = only creates PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
