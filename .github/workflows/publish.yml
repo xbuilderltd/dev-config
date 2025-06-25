@@ -9,19 +9,20 @@ jobs:
   ci:
     uses: ./.github/workflows/ci.yml
 
-  release:
-    name: Release
+  # Auto-publish for owner
+  release-owner:
+    name: Release (Owner)
     runs-on: ubuntu-latest
-    needs: ci # Wait for CI to pass before releasing
+    needs: ci
+    if: github.repository_owner == github.actor
     permissions:
-      contents: write # Need write permission to create and push tags
-      pull-requests: write # For creating release PRs
-      id-token: write # For npm provenance
+      contents: write
+      pull-requests: write
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
         with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
 
       - name: Setup pnpm and Node.js
@@ -35,15 +36,42 @@ jobs:
       - name: Build package
         run: pnpm run build
 
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
+      - name: Publish to npm
         uses: changesets/action@v1
         with:
           publish: pnpm changeset:publish
-          title: 'chore: release package'
-          commit: 'chore: release package'
           createGithubReleases: true
           setupGitUser: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # Create PR for non-owners
+  release-pr:
+    name: Release PR (Contributors)
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.repository_owner != github.actor
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm and Node.js
+        uses: ./.github/actions/setup-pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Create Release PR
+        uses: changesets/action@v1
+        with:
+          title: 'chore: release package'
+          commit: 'chore: release package'
+          # Note: No 'publish' parameter = only creates PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

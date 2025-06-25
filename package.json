@@ -49,7 +49,6 @@
     "prepublishOnly": "pnpm run clean && pnpm run build",
     "changeset": "changeset",
     "changeset:version": "changeset version",
-    "changeset:release": "changeset && changeset version",
     "changeset:publish": "pnpm run build && changeset publish",
     "prepare": "husky"
   },
