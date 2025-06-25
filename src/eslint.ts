@@ -54,6 +54,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       'build/',
       'coverage/',
       'node_modules/',
+      '**/node_modules/**',
       'example-*.js',
       '**/*.config.*',
       '**/*.d.ts',
