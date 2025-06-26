@@ -1,5 +1,11 @@
 # @pixpilot/dev-config
 
+## 1.0.21
+
+### Patch Changes
+
+- 390d869: remove redundant ignore patterns from ESLint configuration
+
 ## 1.0.20
 
 ### Patch Changes
